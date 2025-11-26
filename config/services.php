@@ -34,5 +34,9 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
-
+    'waha' => [
+    'base_url' => env('WAHA_BASE_URL'),
+    'session' => env('WAHA_SESSION_NAME', 'default'),
+    'api_key' => env('WAHA_API_KEY'),
+    ],
 ];

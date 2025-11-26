@@ -176,10 +176,11 @@
                 <p>Please confirm your attendance by 01.12.2025</p>
                 <div class="tdy">
                     <div class="rsvp-form">
-                        <form id="wedding-rsvp">
+                        <form id="wedding-rsvp" method="POST" action="{{ route('invite.front') }}" >
+                            @csrf
                             <div class="form-group">
                                 <label for="name">Full Name</label>
-                                <input type="text" id="name" name="name" required>
+                                <input type="text" id="name" name="nama" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
@@ -187,7 +188,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="guests">Number of Guests</label>
-                                <select id="guests" name="guests" required>
+                                <select id="guests" name="jml_hadir" required>
                                     <option value="" disabled selected>Select number of guests</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -195,15 +196,6 @@
                                     <option value="4">4</option>
                                     <option value="5">5+</option>
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="attendance">Will you attend?</label>
-                                <div class="radio-group">
-                                    <input type="radio" id="yes" name="attendance" value="yes" required>
-                                    <label for="yes">Yes, I'll be there</label>
-                                    <input type="radio" id="no" name="attendance" value="no" required>
-                                    <label for="no">Sorry, I can't make it</label>
-                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="message">Message for the couple</label>
@@ -241,6 +233,26 @@
             </div>
         </section>
     </main>
+    @if(session('showQR'))
+<div id="qrModal" 
+    style="position: fixed; top:0; left:0; width:100%; height:100%; 
+           background: rgba(0,0,0,0.6); display:flex; justify-content:center; 
+           align-items:center; z-index:9999;">
+    
+    <div style="background:white; padding:20px; border-radius:10px; text-align:center;">
+        <h2>QR Code Anda</h2>
+        <img src="{{ session('qrImage') }}" style="width:250px; margin:20px auto;">
+        <p>Kode: <b>{{ session('qrCode') }}</b></p>
+
+        <button onclick="document.getElementById('qrModal').style.display='none'" 
+                style="margin-top:15px; padding:10px 20px; background:black; color:white; border:none;">
+            Tutup
+        </button>
+    </div>
+
+</div>
+@endif
+
     <script>
         // Animasi Navbar Scroll dengan Height Mengecil
 window.addEventListener('scroll', function() {

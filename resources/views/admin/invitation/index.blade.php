@@ -31,6 +31,7 @@
                     <th class="p-3">Status Scan</th>
                     <th class="p-3">Created_at</th>
                     <th class="p-3">Updated_at</th>
+                    <th class="p-3">message</th>
                     <th class="p-3 text-center">Aksi</th>
                 </tr>
             </thead>
@@ -47,6 +48,7 @@
 
                     {{-- EMAIL --}}
                     <td class="p-3">{{ $item->email ?? '-' }}</td>
+
 
                     {{-- KEHADIRAN --}}
                     <td class="p-3">
@@ -73,25 +75,21 @@
 
                     {{-- UPDATED_AT --}}
                     <td class="p-3">{{ $item->updated_at->format('d M Y') }}</td>
-
+                    <td class="p-3">{{ $item->message ?? '-' }}</td>
                     {{-- AKSI --}}
                     <td class="p-3 text-center flex items-center justify-center gap-2">
 
                         {{-- EDIT --}}
-                        <a href="{{ route('admin.invitation.edit', $item->id) }}"
-                           class="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm hover:bg-blue-700">
-                            Edit
-                        </a>
+                        <a href="{{ route('admin.invitation.edit', $item->id_invitation) }}" 
+                            class="btn btn-warning btn-sm">
+                                Edit
+                            </a>
 
                         {{-- DELETE --}}
-                        <form action="{{ route('admin.invitation.destroy', $item->id) }}"
-                              method="POST"
-                              onsubmit="return confirm('Hapus data ini?')">
+                        <form action="{{ route('admin.invitation.destroy', $item->id_invitation) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button class="px-4 py-2 rounded-lg bg-red-600 text-white text-sm hover:bg-red-700">
-                                Delete
-                            </button>
+                            <button type="submit">Delete</button>
                         </form>
 
                     </td>
@@ -103,5 +101,15 @@
     </div>
 
 </div>
+@if(session('qr_popup'))
+<script>
+    window.onload = function() {
+        let qr = "{{ session('qr_popup') }}";
+
+        alert("QR Berhasil Dibuat!");
+        window.open(qr, "_blank", "width=400,height=400");
+    };
+</script>
+@endif
 
 @endsection

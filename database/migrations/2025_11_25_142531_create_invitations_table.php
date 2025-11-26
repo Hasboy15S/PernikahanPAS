@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->integer('jml_hadir')->nullable()->default(0);
             $table->string('code_qr')->unique()->nullable();
+            $table->text('message')->nullable();
             $table->enum('status', ['belum', 'hadir'])->default('belum');
             $table->timestamps(); // created_at & updated_at otomatis
         });

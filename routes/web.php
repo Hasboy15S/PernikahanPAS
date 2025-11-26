@@ -8,10 +8,15 @@ use App\Models\Produk;
 
 
 Route::get('/', function () {
-    $produk = Produk::all(); // ambil semua produk
+    $produk = Produk::all();
     return view('index', compact('produk'));
-});
-
+})->name('index');
+Route::get('/scan/{code}', [InvitationController::class, 'scan'])->name('scan.qr');
+Route::post('/invite-user', [InvitationController::class, 'storeFront'])->name('invite.front');
+Route::post('/api/scan', [InvitationController::class, 'scan'])->name('api.scan');
+Route::get('/qr/{id}', [InvitationController::class, 'qrImage'])->name('qr.image');
+Route::get('/invite', [InvitationController::class, 'create']);
+Route::post('/invite', [InvitationController::class, 'store']);
 Route::prefix('admin')->name('admin.')->group(function () {
 
     // Dashboard
@@ -25,6 +30,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('produk', ProdukController::class);
 
     // Aksesoris (jika ingin dipisah dari produk)
-    Route::resource('aksesoris', AksesorisController::class);
+    // Route::resource('aksesoris', AksesorisController::class);
 
 });

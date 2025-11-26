@@ -5,64 +5,124 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Invitation;
-
+use Illuminate\Support\Str;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\Storage;
 
 class InvitationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-    $data = Invitation::all();
-    return view('admin.invitation.index', compact('data'));
+        $data = Invitation::all();
+        return view('admin.invitation.index', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.invitation.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'nullable|email',
+            'jml_hadir' => 'required|integer|min:1',
+            'message' => 'nullable|string',
+        ]);
+
+        // Generate kode unik
+        $code = strtoupper(Str::random(8));
+
+        // Generate QR dalam bentuk SVG
+        $qrSvg = QrCode::format('svg')
+        ->size(300)
+        ->generate(url('/scan/'.$code));
+
+        // Simpan file QR sebagai SVG
+        $qrFileName = 'qr_' . $code . '.svg';
+        Storage::disk('public')->put('qr/' . $qrFileName, $qrSvg);
+
+        // Simpan database
+        $invitation = Invitation::create([
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'jml_hadir' => $request->jml_hadir,
+            'messge' => $request->message,
+            'code_qr' => $code,
+            'status' => 'belum'
+        ]);
+
+        // Kirim QR ke halaman agar bisa muncul popup
+        return redirect()
+            ->route('admin.invitation.index')
+            ->with([
+                'success' => 'Data berhasil ditambahkan!',
+                'qr_popup' => asset('storage/qr/' . $qrFileName)
+            ]);
+    }
+public function storeFront(Request $request)
+{
+    $request->validate([
+        'nama' => 'required|string|max:255',
+        'email' => 'nullable|email',
+        'jml_hadir' => 'required|integer|min:1',
+        'message' => 'nullable|string',
+    ]);
+
+    $code = strtoupper(Str::random(8));
+
+    $qrSvg = QrCode::format('svg')->size(300)->generate($code);
+
+    $qrFileName = 'qr_' . $code . '.svg';
+    Storage::disk('public')->put('qr/' . $qrFileName, $qrSvg);
+
+    Invitation::create([
+        'nama' => $request->nama,
+        'email' => $request->email,
+        'jml_hadir' => $request->jml_hadir,
+        'message' => $request->message, // diperbaiki
+        'code_qr' => $code,
+        'status' => 'belum',
+    ]);
+
+    return redirect()
+        ->route('index') // sudah ada name index
+        ->with([
+            'showQR' => true,
+            'qrImage' => asset('storage/qr/' . $qrFileName),
+            'qrCode' => $code
+        ]);
+}
+public function scan($code)
+{
+    $inv = Invitation::where('code_qr', $code)->first();
+
+    if (!$inv) {
+        return view('invitation.scan_result', [
+            'title' => 'QR Tidak Valid',
+            'message' => 'Kode QR tidak ditemukan dalam sistem.'
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+    // Jika sudah hadir
+    if ($inv->status === 'hadir') {
+        return view('invitation.scan_result', [
+            'title' => 'Sudah Tercatat',
+            'message' => 'Anda sudah melakukan presensi sebelumnya.'
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    // Update status menjadi hadir
+    $inv->update([
+        'status' => 'hadir'
+    ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    return view('invitation.scan_result', [
+        'title' => 'Presensi Berhasil!',
+        'message' => 'Terima kasih, presensi Anda telah dicatat.'
+    ]);
+}
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
