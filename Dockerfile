@@ -1,6 +1,3 @@
-# ===============================
-# Base PHP 8.2 + Composer
-# ===============================
 FROM php:8.2-fpm
 
 # Install system dependencies
@@ -12,7 +9,6 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libzip-dev \
     zip \
-    curl \
     npm
 
 # Install PHP extensions
@@ -22,31 +18,33 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Set working directory
 WORKDIR /var/www
 
-# Copy all project files
 COPY . .
 
-# Install backend dependencies
+# Install dependencies
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# Install Node dependencies and build frontend
+# Build frontend
 RUN npm install && npm run build
 
-# Set permissions
+# Permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Storage link (tidak error kalau sudah ada)
+# THIS IS WRONG DURING BUILD → remove
+# RUN php artisan cache:clear
+
+# Symlink storage
 RUN php artisan storage:link || true
 
-# Clear and cache config
-RUN php artisan config:clear && php artisan config:cache
-
-# Railway will pass PORT automatically
+# Railway sets PORT automatically
 ENV PORT=8000
-RUN php artisan config:clear
-RUN php artisan cache:clear
 
-# Start Laravel
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=${PORT}"]
+CMD sh -c "\
+    php artisan config:clear && \
+    php artisan cache:clear && \
+    php artisan route:clear && \
+    php artisan view:clear && \
+    php artisan migrate --force || true && \
+    php artisan serve --host=0.0.0.0 --port=${PORT} \
+"
