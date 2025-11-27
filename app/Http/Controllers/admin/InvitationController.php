@@ -8,6 +8,9 @@ use App\Models\Invitation;
 use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendInvitationQR;
+
 
 class InvitationController extends Controller
 {
@@ -27,7 +30,7 @@ class InvitationController extends Controller
         // Validasi input
         $request->validate([
             'nama' => 'required|string|max:255',
-            'email' => 'nullable|email',
+            'email' => 'required|email|unique:invitations,email',
             'jml_hadir' => 'required|integer|min:1',
             'message' => 'nullable|string',
         ]);
@@ -66,18 +69,22 @@ public function storeFront(Request $request)
 {
     $request->validate([
         'nama' => 'required|string|max:255',
-        'email' => 'nullable|email',
+        'email' => 'required|email|unique:invitations,email',
         'jml_hadir' => 'required|integer|min:1',
         'message' => 'nullable|string',
     ]);
 
     $code = strtoupper(Str::random(8));
 
-    $qrSvg = QrCode::format('svg')->size(300)->generate($code);
-
+$qrSvg = QrCode::format('svg')->size(300)->generate(url('/scan/' . $code));
     $qrFileName = 'qr_' . $code . '.svg';
-    Storage::disk('public')->put('qr/' . $qrFileName, $qrSvg);
-
+    $qrPath = 'qr/' . $qrFileName;
+    Storage::disk('public')->put($qrPath, $qrSvg);
+    Mail::to($request->email)->send(new SendInvitationQR(
+        $request->nama,
+        $code,
+        asset('storage/' . $qrPath)
+    ));
     Invitation::create([
         'nama' => $request->nama,
         'email' => $request->email,
@@ -123,6 +130,24 @@ public function scan($code)
         'title' => 'Presensi Berhasil!',
         'message' => 'Terima kasih, presensi Anda telah dicatat.'
     ]);
+}
+public function destroy($id)
+{
+    $inv = Invitation::findOrFail($id);
+
+    // hapus file qr jika ada
+    if ($inv->code_qr) {
+        $file = 'qr/qr_' . $inv->code_qr . '.svg';
+        if (Storage::disk('public')->exists($file)) {
+            Storage::disk('public')->delete($file);
+        }
+    }
+
+    $inv->delete();
+
+    return redirect()
+        ->route('admin.invitation.index')
+        ->with('success', 'Data berhasil dihapus');
 }
 
 }

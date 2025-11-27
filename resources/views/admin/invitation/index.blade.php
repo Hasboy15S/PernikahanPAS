@@ -26,7 +26,6 @@
                     <th class="p-3">Id</th>
                     <th class="p-3">Nama</th>
                     <th class="p-3">Email</th>
-                    <th class="p-3">Kehadiran</th>
                     <th class="p-3">Jumlah Hadir</th>
                     <th class="p-3">Status Scan</th>
                     <th class="p-3">Created_at</th>
@@ -48,16 +47,6 @@
 
                     {{-- EMAIL --}}
                     <td class="p-3">{{ $item->email ?? '-' }}</td>
-
-
-                    {{-- KEHADIRAN --}}
-                    <td class="p-3">
-                        @if ($item->kehadiran === 'hadir')
-                            <span class="px-3 py-1 rounded-full text-white bg-green-600 text-sm">Hadir</span>
-                        @else
-                            <span class="px-3 py-1 rounded-full text-white bg-red-600 text-sm">Tidak</span>
-                        @endif
-                    </td>
 
                     {{-- JUMLAH --}}
                     <td class="p-3">{{ $item->jml_hadir ?? 0 }}</td>
@@ -81,7 +70,7 @@
 
                         {{-- EDIT --}}
                         <a href="{{ route('admin.invitation.edit', $item->id_invitation) }}" 
-                            class="btn btn-warning btn-sm">
+                            class="px-3 py-1 rounded-full text-white bg-green-600 text-sm">
                                 Edit
                             </a>
 
@@ -89,7 +78,7 @@
                         <form action="{{ route('admin.invitation.destroy', $item->id_invitation) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Delete</button>
+                            <button type="submit" class="px-3 py-1 rounded-full text-white bg-red-600 text-sm">Delete</button>
                         </form>
 
                     </td>
