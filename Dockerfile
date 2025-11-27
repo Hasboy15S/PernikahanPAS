@@ -24,9 +24,7 @@ RUN npm install && npm run build
 RUN chown -R www-data:www-data storage bootstrap/cache
 RUN php artisan storage:link || true
 
-# 🔥 Jangan kunci port manual!
-# Railway akan mengirim environment variable PORT otomatis
-ENV PORT=${PORT}
+# PENTING: expose dynamic port
+EXPOSE 8000
 
-# 🔥 Gunakan $PORT yang diberikan Railway
-CMD sh -c "php artisan config:clear && php artisan cache:clear && php artisan serve --host=0.0.0.0 --port=$PORT"
+CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=$PORT"]
