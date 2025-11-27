@@ -45,6 +45,8 @@ RUN php artisan config:clear && php artisan config:cache
 
 # Railway will pass PORT automatically
 ENV PORT=8000
+RUN php artisan config:clear
+RUN php artisan cache:clear
 
 # Start Laravel
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=${PORT}"]
