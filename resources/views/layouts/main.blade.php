@@ -7,7 +7,8 @@
     <title>@yield('title', 'Pernikahan')</title>
 
     {{-- Tailwind --}}
-    @vite('resources/css/app.css')
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+
 
     {{-- Favicon (dummy) --}}
     <link rel="icon" type="image/png" href="{{ asset('favicon.ico') }}">

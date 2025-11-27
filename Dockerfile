@@ -28,7 +28,7 @@ COPY . .
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # Install Tailwind + Vite build
-RUN npm install && npm run build
+RUN npm install --include=dev && npm run build
 
 # Set permissions
 RUN chown -R www-data:www-data storage bootstrap/cache
