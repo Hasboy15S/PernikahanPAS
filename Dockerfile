@@ -1,22 +1,35 @@
 FROM php:8.2-fpm
 
-# Install dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
-    zip unzip git curl
+    libzip-dev \
+    zip
 
-# Install GD extension
+# Install PHP extensions
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd
+    && docker-php-ext-install gd pdo pdo_mysql zip
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-WORKDIR /var/www/html
+# Copy Laravel project
+WORKDIR /var/www
 COPY . .
 
-RUN composer install --optimize-autoloader --no-interaction
+# Install Laravel dependencies
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-CMD ["php-fpm"]
+# Build assets
+RUN npm install && npm run build || true
+
+# Set permissions
+RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
+RUN php artisan storage:link
+EXPOSE 8000
+
+CMD [ "php", "artisan", "serve", "--host=0.0.0.0", "--port=8000" ]
