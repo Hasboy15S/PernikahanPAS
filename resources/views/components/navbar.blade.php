@@ -21,6 +21,20 @@
             </div>
         </nav>
         <div class="line"></div>
+
+            <div class="mobile-menu">
+        <button class="mobile-close" aria-label="Close menu">×</button>
+        <ul class="mobile-nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#story">Our Story</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#rsvp">RSVP</a></li>
+        </ul>
+        <div class="mobile-btn">
+            <a href="#rsvp" class="btn-primary">RSVP Now</a>
+        </div>
+    </div>
 </header>
 
 <script src="{{ asset('script.js') }}"></script>

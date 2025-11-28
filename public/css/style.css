@@ -564,7 +564,7 @@ header.scrolled + .hero {
 /* Product Section */
 .product {
     padding: 5rem 0;
-    background: #E8E4D9;
+    background: #ffffff;
     text-align: center;
 }
 
@@ -922,7 +922,7 @@ header.scrolled + .hero {
 /* Closing Section */
 .closing {
     padding: 5rem 0;
-    background-color: #E8E4D9; ;
+    background-color: #ffffff;
     text-align: center;
 }
 
@@ -966,3 +966,1142 @@ header.scrolled + .hero {
 }
 
 /* Footer */
+
+
+/* ===== RESPONSIVE STYLES ===== */
+
+/* Tablet Landscape (1024px - 1200px) */
+@media (max-width: 1200px) {
+    :root {
+        --header-font-size: 3rem;
+        --subheader-font-size: 2rem;
+    }
+    
+    .header {
+        padding: 2rem 4rem;
+    }
+    
+    .ivt .container {
+        max-width: 1100px;
+        gap: 40px;
+    }
+    
+    .img-sch {
+        max-width: 900px;
+    }
+    
+    .img-item-1,
+    .img-item-2 {
+        width: 240px;
+        padding: 2rem 1rem;
+    }
+    
+    .img-item-1 img,
+    .img-item-2 img {
+        width: 120px;
+        height: 120px;
+        left: 150px;
+    }
+    
+    .product-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 800px;
+    }
+}
+
+/* Tablet Portrait (768px - 1024px) */
+@media (max-width: 1024px) {
+    :root {
+        --header-font-size: 2.5rem;
+        --subheader-font-size: 1.8rem;
+    }
+    
+    .header {
+        padding: 1.5rem 3rem;
+    }
+    
+    .nav-link {
+        gap: 2rem;
+    }
+    
+    .nav-link ul {
+        gap: 2rem;
+        margin-left: 2rem;
+    }
+    
+    .hero-content img {
+        max-width: 350px;
+        transform: translateY(80px);
+    }
+    
+    .date-badge {
+        margin-top: 150px;
+    }
+    
+    .ivt .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .couple-image {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .ivt-content {
+        padding: 0 20px;
+        order: -1;
+    }
+    
+    .ivt-content h2 {
+        margin-left: 0;
+    }
+    
+    .about > .container > p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .img-sch {
+        flex-direction: column;
+        gap: 3rem;
+        margin-top: 50px;
+    }
+    
+    .img-item-1,
+    .img-item-2 {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto !important;
+        border-left: 2px solid var(--accent-color);
+        border-right: 2px solid var(--accent-color);
+        text-align: center;
+        align-items: center;
+    }
+    
+    .img-item-1 img,
+    .img-item-2 img {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        margin: 20px auto 0;
+    }
+    
+    .img-item-1::before,
+    .img-item-2::before {
+        display: none;
+    }
+    
+    .product h2,
+    .product > .container > p {
+        margin-left: 0;
+    }
+    
+    .product-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        max-width: 700px;
+    }
+    
+    .product-item {
+        padding: 2rem;
+    }
+    
+    .countdown {
+        gap: 15px;
+    }
+    
+    .countdown-item {
+        min-width: 80px;
+        padding: 20px 10px;
+    }
+    
+    .countdown-item span {
+        font-size: 2rem;
+    }
+    
+    .closing h2 {
+        margin-left: 0;
+    }
+}
+
+/* Mobile Landscape (576px - 768px) */
+@media (max-width: 768px) {
+    :root {
+        --header-font-size: 2rem;
+        --subheader-font-size: 1.5rem;
+        --paragraph-font-size: 0.9rem;
+    }
+    
+    .header {
+        padding: 1rem 2rem;
+        flex-wrap: wrap;
+    }
+    
+    header.scrolled .header {
+        padding: 0.5rem 2rem;
+    }
+    
+    .logo {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .logo img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .nav-link {
+        gap: 1rem;
+        flex-grow: 0;
+        width: 100%;
+        order: 3;
+        margin-top: 1rem;
+        justify-content: center;
+    }
+    
+    .nav-link ul {
+        margin-left: 0;
+        gap: 1.5rem;
+    }
+    
+    .nav-link a {
+        font-size: 0.9rem;
+    }
+    
+    .btn {
+        margin-left: 0;
+    }
+    
+    .btn-primary {
+        padding: 0.4rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .hero {
+        height: 80vh;
+    }
+    
+    .hero-content img {
+        max-width: 280px;
+        transform: translateY(60px);
+        margin-left: 0;
+    }
+    
+    .date-badge {
+        margin-top: 120px;
+        padding: 0.6rem 2rem;
+        font-size: 0.8rem;
+    }
+    
+    .scroll-indicator i {
+        font-size: 1.5rem;
+    }
+    
+    .ivt {
+        padding: 5rem 0;
+    }
+    
+    .ivt-content h2 {
+        font-size: 2rem;
+    }
+    
+    .ivt-content p {
+        margin-top: 30px;
+        font-size: 0.9rem;
+    }
+    
+    .about {
+        padding: 3rem 0;
+    }
+    
+    .about > .container > p {
+        margin-bottom: 2rem;
+    }
+    
+    .img-sch {
+        margin-top: 30px;
+        gap: 2rem;
+    }
+    
+    .img-item-1,
+    .img-item-2 {
+        padding: 1.5rem 1rem;
+        min-height: 150px;
+    }
+    
+    .img-item-1 h2,
+    .img-item-2 h2 {
+        font-size: 1.5rem;
+    }
+    
+    .img-item-1 p,
+    .img-item-2 p {
+        font-size: 1.1rem;
+    }
+    
+    .img-item-1 img,
+    .img-item-2 img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .product {
+        padding: 3rem 0;
+    }
+    
+    .product-gallery {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        gap: 1.5rem;
+    }
+    
+    .product-item {
+        padding: 1.5rem;
+    }
+    
+    .product-item img {
+        height: 180px;
+    }
+    
+    .product-item h3 {
+        font-size: 1.3rem;
+    }
+    
+    .product-item p {
+        font-size: 1.1rem;
+    }
+    
+    .rsvp {
+        padding: 3rem 0;
+    }
+    
+    .rsvp-form {
+        padding: 0 1rem;
+    }
+    
+    .form-group {
+        margin-bottom: 2rem;
+    }
+    
+    .radio-group {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .submit-btn {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+    
+    .closing {
+        padding: 3rem 0;
+    }
+    
+    .countdown {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .countdown-item {
+        min-width: 70px;
+        padding: 15px 8px;
+        flex: 1;
+    }
+    
+    .countdown-item span {
+        font-size: 1.8rem;
+    }
+    
+    .countdown-item p {
+        font-size: 0.8rem;
+    }
+    
+    .closing h2 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Mobile Portrait (320px - 576px) */
+@media (max-width: 576px) {
+    .header {
+        padding: 1rem;
+    }
+    
+    header.scrolled .header {
+        padding: 0.5rem 1rem;
+    }
+    
+    .nav-link ul {
+        gap: 1rem;
+    }
+    
+    .nav-link a {
+        font-size: 0.8rem;
+    }
+    
+    .btn-primary {
+        padding: 0.3rem 1.2rem;
+        font-size: 0.8rem;
+    }
+    
+    .hero {
+        height: 70vh;
+    }
+    
+    .hero-content img {
+        max-width: 220px;
+        transform: translateY(40px);
+    }
+    
+    .date-badge {
+        margin-top: 100px;
+        padding: 0.5rem 1.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .ivt {
+        padding: 3rem 0;
+    }
+    
+    .ivt-content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .ivt-content p {
+        margin-top: 20px;
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+    
+    .about h1 {
+        font-size: 2rem;
+    }
+    
+    .img-item-1,
+    .img-item-2 {
+        padding: 1rem 0.8rem;
+        min-height: 130px;
+    }
+    
+    .img-item-1 h2,
+    .img-item-2 h2 {
+        font-size: 1.3rem;
+    }
+    
+    .img-item-1 p,
+    .img-item-2 p {
+        font-size: 1rem;
+    }
+    
+    .img-item-1 img,
+    .img-item-2 img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .product {
+        padding: 2rem 0;
+    }
+    
+    .product h2 {
+        font-size: 2rem;
+    }
+    
+    .product-gallery {
+        max-width: 300px;
+        gap: 1rem;
+    }
+    
+    .product-item {
+        padding: 1rem;
+    }
+    
+    .product-item img {
+        height: 150px;
+    }
+    
+    .product-item h3 {
+        font-size: 1.2rem;
+    }
+    
+    .product-item p {
+        font-size: 1rem;
+    }
+    
+    .rsvp {
+        padding: 2rem 0;
+    }
+    
+    .rsvp h2 {
+        font-size: 2rem;
+    }
+    
+    .form-group label {
+        font-size: 0.9rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 1rem;
+    }
+    
+    .countdown {
+        gap: 8px;
+    }
+    
+    .countdown-item {
+        min-width: 60px;
+        padding: 12px 6px;
+    }
+    
+    .countdown-item span {
+        font-size: 1.5rem;
+    }
+    
+    .countdown-item p {
+        font-size: 0.7rem;
+    }
+    
+    .closing h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Very Small Mobile (320px and below) */
+@media (max-width: 320px) {
+    .header {
+        padding: 0.8rem;
+    }
+    
+    .nav-link ul {
+        gap: 0.8rem;
+    }
+    
+    .nav-link a {
+        font-size: 0.75rem;
+    }
+    
+    .hero-content img {
+        max-width: 180px;
+    }
+    
+    .date-badge {
+        padding: 0.4rem 1.2rem;
+        font-size: 0.7rem;
+    }
+    
+    .ivt-content h2 {
+        font-size: 1.6rem;
+    }
+    
+    .product-gallery {
+        max-width: 250px;
+    }
+    
+    .product-item {
+        padding: 0.8rem;
+    }
+    
+    .countdown-item {
+        min-width: 50px;
+        padding: 10px 4px;
+    }
+    
+    .countdown-item span {
+        font-size: 1.3rem;
+    }
+}
+
+/* High DPI Screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero {
+        background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');
+    }
+}
+
+/* Print Styles */
+@media print {
+    .header,
+    .scroll-indicator,
+    .btn-primary {
+        display: none;
+    }
+    
+    .hero {
+        height: auto;
+        background: none;
+    }
+    
+    .hero::before {
+        display: none;
+    }
+    
+    body {
+        color: black;
+        background: white;
+    }
+}
+
+/* Orientation Specific */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        height: 100vh;
+    }
+    
+    .hero-content img {
+        max-width: 250px;
+        transform: translateY(40px);
+    }
+    
+    .date-badge {
+        margin-top: 80px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --font-main-color: #ffffff;
+        --font-sec-color: #e0e0e0;
+    }
+    
+    body {
+        background-color: #1a1a1a;
+        color: var(--font-sec-color);
+    }
+    
+    .ivt {
+        background: #2d2d2d;
+    }
+    
+    .about {
+        background: #333333;
+    }
+    
+    .product {
+        background: #2a2a2a;
+    }
+    
+    .rsvp {
+        background: #333333;
+    }
+    
+    .closing {
+        background: #2a2a2a;
+    }
+}
+
+/* Reduced Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .scroll-indicator {
+        animation: none;
+    }
+    
+    .product-item:hover {
+        transform: none;
+    }
+}
+
+/* ===== MOBILE NAVBAR STYLES ===== */
+
+/* Mobile Navigation */
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    width: 25px;
+    height: 18px;
+    position: relative;
+}
+
+.hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: var(--font-main-color);
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.hamburger span:nth-child(1) {
+    transform: translateY(0) rotate(0);
+}
+
+.hamburger span:nth-child(2) {
+    transform: translateY(6px) rotate(0);
+    opacity: 1;
+}
+
+.hamburger span:nth-child(3) {
+    transform: translateY(12px) rotate(0);
+}
+
+/* Hamburger Animation ketika aktif */
+.nav-toggle.active .hamburger span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.nav-toggle.active .hamburger span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(10px);
+}
+
+.nav-toggle.active .hamburger span:nth-child(3) {
+    transform: translateY(6px) rotate(-45deg);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+.mobile-nav-links {
+    list-style: none;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.mobile-nav-links li {
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+.mobile-menu.active .mobile-nav-links li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger animation untuk menu items */
+.mobile-menu.active .mobile-nav-links li:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu.active .mobile-nav-links li:nth-child(2) { transition-delay: 0.15s; }
+.mobile-menu.active .mobile-nav-links li:nth-child(3) { transition-delay: 0.2s; }
+.mobile-menu.active .mobile-nav-links li:nth-child(4) { transition-delay: 0.25s; }
+.mobile-menu.active .mobile-nav-links li:nth-child(5) { transition-delay: 0.3s; }
+
+.mobile-nav-links a {
+    text-decoration: none;
+    color: var(--font-sec-color);
+    font-size: 1.5rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+}
+
+.mobile-nav-links a:hover {
+    color: var(--accent-color);
+    transform: translateX(10px);
+}
+
+.mobile-btn {
+    margin-top: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease 0.35s;
+}
+
+.mobile-menu.active .mobile-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mobile-btn .btn-primary {
+    color: var(--font-sec-color);
+    border-color: var(--font-sec-color);
+    font-size: 1.1rem;
+    padding: 0.8rem 2.5rem;
+}
+
+.mobile-btn .btn-primary:hover {
+    background: var(--font-sec-color);
+    color: white;
+}
+
+/* Close Button */
+.mobile-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--font-sec-color);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.mobile-close:hover {
+    color: var(--accent-color);
+}
+
+/* Scrolled state untuk hamburger */
+header.scrolled .hamburger span {
+    background-color: var(--font-sec-color);
+}
+
+/* ===== MOBILE NAVBAR STYLES ===== */
+
+/* Mobile Navigation */
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+    margin-left: auto; /* Posisikan ke kanan */
+}
+
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    width: 25px;
+    height: 18px;
+    position: relative;
+}
+
+.hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: var(--font-main-color);
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.hamburger span:nth-child(1) {
+    transform: translateY(0) rotate(0);
+}
+
+.hamburger span:nth-child(2) {
+    transform: translateY(6px) rotate(0);
+    opacity: 1;
+}
+
+.hamburger span:nth-child(3) {
+    transform: translateY(12px) rotate(0);
+}
+
+/* Hamburger Animation ketika aktif */
+.nav-toggle.active .hamburger span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.nav-toggle.active .hamburger span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(10px);
+}
+
+.nav-toggle.active .hamburger span:nth-child(3) {
+    transform: translateY(6px) rotate(-45deg);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(100%); /* Mulai dari kanan */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-menu.active {
+    transform: translateX(0); /* Geser ke kiri */
+}
+
+.mobile-nav-links {
+    list-style: none;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.mobile-nav-links li {
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateX(20px); /* Animasi dari kanan */
+    transition: all 0.4s ease;
+}
+
+.mobile-menu.active .mobile-nav-links li {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Stagger animation untuk menu items */
+.mobile-menu.active .mobile-nav-links li:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu.active .mobile-nav-links li:nth-child(2) { transition-delay: 0.15s; }
+.mobile-menu.active .mobile-nav-links li:nth-child(3) { transition-delay: 0.2s; }
+.mobile-menu.active .mobile-nav-links li:nth-child(4) { transition-delay: 0.25s; }
+.mobile-menu.active .mobile-nav-links li:nth-child(5) { transition-delay: 0.3s; }
+
+.mobile-nav-links a {
+    text-decoration: none;
+    color: var(--font-sec-color);
+    font-size: 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+}
+
+.mobile-nav-links a:hover {
+    color: var(--accent-color);
+    transform: translateX(-10px); /* Geser ke kiri saat hover */
+}
+
+.mobile-btn {
+    margin-top: 2rem;
+    opacity: 0;
+    transform: translateX(20px); /* Animasi dari kanan */
+    transition: all 0.4s ease 0.35s;
+}
+
+.mobile-menu.active .mobile-btn {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.mobile-btn .btn-primary {
+    color: var(--font-sec-color);
+    border-color: var(--font-sec-color);
+    font-size: 1.1rem;
+    padding: 0.8rem 2.5rem;
+}
+
+.mobile-btn .btn-primary:hover {
+    background: var(--font-sec-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Close Button - Posisi di kanan atas */
+.mobile-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--font-sec-color);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+.mobile-menu.active .mobile-close {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.4s;
+}
+
+.mobile-close:hover {
+    color: var(--accent-color);
+    transform: scale(1.1);
+}
+
+/* Scrolled state untuk hamburger */
+header.scrolled .hamburger span {
+    background-color: var(--font-sec-color);
+}
+
+/* ===== UPDATE BREAKPOINTS UNTUK MOBILE NAV ===== */
+
+/* Tablet Portrait (768px - 1024px) - Update */
+@media (max-width: 1024px) {
+    .nav-toggle {
+        display: block;
+        order: 3; /* Pastikan di urutan terakhir */
+    }
+    
+    .nav-link {
+        display: none;
+    }
+    
+    .btn {
+        display: none;
+    }
+    
+    /* Adjust header untuk mobile */
+    .header {
+        justify-content: space-between;
+        position: relative;
+    }
+    
+    /* Logo di kiri, hamburger di kanan */
+    .logo {
+        order: 1;
+    }
+    
+    .nav-toggle {
+        order: 3;
+        margin-left: auto;
+    }
+}
+
+/* Mobile Landscape (576px - 768px) - Update */
+@media (max-width: 768px) {
+    .mobile-nav-links a {
+        font-size: 1.3rem;
+    }
+    
+    .mobile-btn .btn-primary {
+        font-size: 1rem;
+        padding: 0.7rem 2rem;
+    }
+    
+    .mobile-close {
+        top: 1.5rem;
+        right: 1.5rem;
+        font-size: 1.8rem;
+    }
+    
+    /* Perbaikan posisi header */
+    .header {
+        padding: 1rem 1.5rem;
+    }
+}
+
+/* Mobile Portrait (320px - 576px) - Update */
+@media (max-width: 576px) {
+    .mobile-nav-links a {
+        font-size: 1.2rem;
+    }
+    
+    .mobile-nav-links li {
+        margin-bottom: 1.5rem;
+    }
+    
+    .mobile-btn .btn-primary {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.8rem;
+    }
+    
+    .mobile-close {
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.5rem;
+    }
+    
+    /* Header lebih compact */
+    .header {
+        padding: 0.8rem 1rem;
+    }
+    
+    .nav-toggle {
+        padding: 0.3rem;
+    }
+}
+
+/* Very Small Mobile (320px and below) - Update */
+@media (max-width: 320px) {
+    .mobile-nav-links a {
+        font-size: 1.1rem;
+    }
+    
+    .mobile-nav-links li {
+        margin-bottom: 1.2rem;
+    }
+    
+    .mobile-close {
+        top: 0.8rem;
+        right: 0.8rem;
+        font-size: 1.3rem;
+    }
+}
+
+/* Orientation Specific untuk Mobile Nav */
+@media (max-width: 768px) and (orientation: landscape) {
+    .mobile-menu {
+        justify-content: flex-start;
+        padding-top: 5rem;
+    }
+    
+    .mobile-nav-links {
+        margin-bottom: 1.5rem;
+    }
+    
+    .mobile-nav-links li {
+        margin-bottom: 1rem;
+    }
+    
+    .mobile-nav-links a {
+        font-size: 1.1rem;
+    }
+}
+
+/* Animasi slide dari kanan untuk mobile menu */
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutToRight {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.mobile-menu.active {
+    animation: slideInFromRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.mobile-menu:not(.active) {
+    animation: slideOutToRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+

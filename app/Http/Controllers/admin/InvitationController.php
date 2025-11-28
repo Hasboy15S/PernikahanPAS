@@ -110,14 +110,19 @@ public function storeFront(Request $request)
 
     $code = strtoupper(Str::random(8));
 
-$qrFileName = 'qr_' . $code . '.png';
+$qrFileName = 'qr_' . $code . '.svg';
 $qrPath = 'qr/' . $qrFileName;
 
-QrCode::format('png')->size(300)->generate($code, storage_path('app/public/' . $qrPath));
+// Generate QR
+QrCode::format('svg')
+    ->size(300)
+    ->generate($code, storage_path('app/public/' . $qrPath));
 
-// Baca file PNG dan convert ke Base64
+// Convert to Base64
 $qrData = base64_encode(file_get_contents(storage_path('app/public/' . $qrPath)));
-$qrBase64 = 'data:image/png;base64,' . $qrData;
+$qrBase64 = 'data:image/svg+xml;base64,' . $qrData;
+
+
 
 // Kirim email dengan embed Base64
 Mail::to($request->email)->send(new SendInvitationQR(
@@ -144,7 +149,7 @@ Mail::to($request->email)->send(new SendInvitationQR(
 }
 public function scanner()
 {
-    return view('admin.scanner.scanner'); // halaman scanner
+    return view('admin.scanner.index'); // halaman scanner
 }
 
 public function scanCode(Request $request)

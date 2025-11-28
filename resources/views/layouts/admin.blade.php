@@ -31,6 +31,11 @@
                class="block px-4 py-2 rounded-lg hover:bg-gray-200 {{ request()->is('admin/produk*') ? 'bg-gray-200 font-semibold' : '' }}">
                Produk
             </a>
+
+            <a href="{{ route('admin.scanner') }}"
+               class="block px-4 py-2 rounded-lg hover:bg-gray-200 {{ request()->is('admin/scanner*') ? 'bg-gray-200 font-semibold' : '' }}">
+               scanner
+            </a>
         </nav>
     </aside>
 
