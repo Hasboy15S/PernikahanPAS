@@ -27,7 +27,11 @@
                 <div class="ivt-content">
                     <!-- posisi ditengah -->
                     <h2>How We Meet</h2>
-                    <p>I first saw Chelsea in the Fall of 2008 when we started our undergrad. I was instantly attracted to her but was far too nervous to speak to her. I had told my friend I liked her and news had traveled fast and she soon found out. Her first reaction was "Who is Fhaty?" and she began searching for me in the class. She started to take notice of me and no matter how boring the lecture was, we never missed a class after that. After a good few months I finally plucked up the courage to ask her out and the rest is history :)</p>
+                    <p>It all started back in 2008, at school. From the very first moment I saw her, something moved inside me, something I had never felt before. I didn’t know what to call it, but I knew she was special. I just didn’t have the courage to say anything.
+                        But somehow, the feeling didn’t stay secret for long. The news spread like wildfire. Everyone knew…. and eventually, so did she. Her first reaction was just a simple curious question “Who is he?”
+                        Then one day, by pure accident, we crossed paths. It was awkward at first two kids pretending not to care but then we started talking. Slowly, naturally, we talked more and more. Without even realizing it, we were falling for each other.
+                        No matter how long the school day was, no matter how boring the classes got, we always managed to make it feel brighter just by being together.
+                        And when we finally graduated, I gathered every bit of</p>
                 </div>
                 <div class="couple-image">
                     <!-- fotonya posisi dikanan -->

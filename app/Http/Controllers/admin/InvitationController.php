@@ -20,6 +20,37 @@ class InvitationController extends Controller
         return view('admin.invitation.index', compact('data'));
     }
 
+    public function edit($id)
+    {
+    $inv = Invitation::findOrFail($id);
+    return view('admin.invitation.edit', compact('inv'));
+    }
+
+    public function update(Request $request, $id)
+    {
+    $request->validate([
+        'nama' => 'required|string|max:255',
+        'email' => 'required|email',
+        'jml_hadir' => 'required|integer|min:0',
+        'message' => 'nullable|string',
+        'status' => 'required|in:belum,hadir,batal', // status yang diperbolehkan
+    ]);
+
+    $inv = Invitation::findOrFail($id);
+
+    $inv->update([
+        'nama' => $request->nama,
+        'email' => $request->email,
+        'jml_hadir' => $request->jml_hadir,
+        'message' => $request->message,
+        'status' => $request->status,
+    ]);
+
+    return redirect()
+        ->route('admin.invitation.index')
+        ->with('success', 'Data tamu berhasil diperbarui!');
+}
+
     public function create()
     {
         return view('admin.invitation.create');
