@@ -110,43 +110,48 @@ public function storeFront(Request $request)
 
     $code = strtoupper(Str::random(8));
 
-$qrFileName = 'qr_' . $code . '.svg';
-$qrPath = 'qr/' . $qrFileName;
+    // === Generate PNG QR ===
+    $qrBuilder = Builder::create()
+        ->writer(new PngWriter())
+        ->data(url('/scan/' . $code))
+        ->size(300)
+        ->margin(10)
+        ->build();
 
-// Generate QR
-QrCode::format('svg')
-    ->size(300)
-    ->generate($code, storage_path('app/public/' . $qrPath));
+    $qrFileName = 'qr_' . $code . '.png';
+    $qrPath = 'qr/' . $qrFileName;
 
-// Convert to Base64
-$qrData = base64_encode(file_get_contents(storage_path('app/public/' . $qrPath)));
-$qrBase64 = 'data:image/svg+xml;base64,' . $qrData;
+    // Simpan PNG ke storage
+    Storage::disk('public')->put($qrPath, $qrBuilder->getString());
 
+    // Kirim email *dengan attachment PNG*
+    Mail::to($request->email)->send(
+        new SendInvitationQR(
+            $request->nama,
+            $code,
+            $qrFileName // KIRIM FILE NAME, BUKAN BASE64
+        )
+    );
 
-
-// Kirim email dengan embed Base64
-Mail::to($request->email)->send(new SendInvitationQR(
-    $request->nama,
-    $code,
-    $qrBase64
-));
     Invitation::create([
         'nama' => $request->nama,
         'email' => $request->email,
         'jml_hadir' => $request->jml_hadir,
-        'message' => $request->message, // diperbaiki
+        'message' => $request->message,
         'code_qr' => $code,
         'status' => 'belum',
     ]);
 
     return redirect()
-        ->route('index') // sudah ada name index
+        ->route('index')
         ->with([
             'showQR' => true,
-            'qrImage' => asset('storage/qr/' . $qrFileName),
+            'qrImage' => asset('storage/' . $qrPath),
             'qrCode' => $code
         ]);
 }
+
+
 public function scanner()
 {
     return view('admin.scanner.index'); // halaman scanner
@@ -154,22 +159,49 @@ public function scanner()
 
 public function scanCode(Request $request)
 {
-    $code = $request->input('code'); // dapat dari scanner JS
+    $request->validate([
+        'code' => 'required|string'
+    ]);
 
+    $code = trim($request->code);
+
+    // Jika scanner mengirim URL lengkap → ambil kode akhirnya
+    if (str_contains($code, '/')) {
+        $code = explode('/', $code);
+        $code = end($code); // ambil bagian paling belakang
+    }
+
+    // Cari tamu berdasarkan kode QR
     $inv = Invitation::where('code_qr', $code)->first();
 
+    // QR tidak valid
     if (!$inv) {
-        return response()->json(['status' => 'error', 'message' => 'QR Tidak Valid']);
+        return response()->json([
+            'status' => 'error',
+            'message' => 'QR tidak valid!'
+        ]);
     }
 
+    // Jika sudah pernah hadir → tidak boleh scan lagi
     if ($inv->status === 'hadir') {
-        return response()->json(['status' => 'error', 'message' => 'Sudah tercatat']);
+        return response()->json([
+            'status' => 'error',
+            'message' => 'QR sudah digunakan sebelumnya!'
+        ]);
     }
 
-    $inv->update(['status' => 'hadir']);
+    // Update status ke hadir
+    $inv->update([
+        'status' => 'hadir'
+    ]);
 
-    return response()->json(['status' => 'success', 'message' => 'Presensi berhasil!']);
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Selamat Datang!',
+        'nama' => $inv->nama
+    ]);
 }
+
 
 public function destroy($id)
 {

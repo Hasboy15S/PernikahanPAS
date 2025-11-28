@@ -31,6 +31,7 @@
                     <th class="p-3">Created_at</th>
                     <th class="p-3">Updated_at</th>
                     <th class="p-3">message</th>
+                    <th class="p-3">kode_qr</th>
                     <th class="p-3 text-center">Aksi</th>
                 </tr>
             </thead>
@@ -53,8 +54,8 @@
 
                     {{-- STATUS SCAN --}}
                     <td class="p-3">
-                        @if ($item->checked_in)
-                            <span class="px-3 py-1 rounded-full bg-green-700 text-white text-sm">Sudah Hadir</span>
+                        @if ($item->status === 'hadir')
+                            <span class="px-3 py-1 rounded-full bg-green-700 text-white text-sm">Hadir</span>
                         @else
                             <span class="px-3 py-1 rounded-full bg-gray-500 text-white text-sm">Belum</span>
                         @endif
@@ -65,6 +66,7 @@
                     {{-- UPDATED_AT --}}
                     <td class="p-3">{{ $item->updated_at->format('d M Y') }}</td>
                     <td class="p-3">{{ $item->message ?? '-' }}</td>
+                    <td class="p-3">{{ $item->code_qr ?? '-' }}</td>
                     {{-- AKSI --}}
                     <td class="p-3 text-center flex items-center justify-center gap-2">
 

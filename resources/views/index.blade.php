@@ -46,34 +46,34 @@
                 <p>The timeline of our beginning. Join us in every step of the way.</p>
                 <div class="img-sch">
                     <div class="img-item-1">
-                        <img src="/asset/c7b8b723-734e-4faf-afb7-80f146fc2ddd 2.png" alt="siraman">
+                        <!-- <img src="/asset/c7b8b723-734e-4faf-afb7-80f146fc2ddd 2.png" alt="siraman"> -->
                         <h2>08.00</h2>
                         <p>mandrus</p>
                     </div>
                     <div class="img-item-1">
-                        <img src="/asset/c7b8b723-734e-4faf-afb7-80f146fc2ddd 2.png" alt="">
+                        <!-- <img src="/asset/c7b8b723-734e-4faf-afb7-80f146fc2ddd 2.png" alt=""> -->
                         <h2>08.45</h2>
                         <p>ijab kobul</p>
                     </div>
                     <div class="img-item-1">
-                        <img src="/asset/c7b8b723-734e-4faf-afb7-80f146fc2ddd 2.png" alt="">
+                        <!-- <img src="/asset/c7b8b723-734e-4faf-afb7-80f146fc2ddd 2.png" alt=""> -->
                         <h2>09.00</h2>
                         <p>panggih manten</p>
                     </div>
                 </div>
                 <div class="img-sch">
                     <div class="img-item-2">
-                        <img src="/asset/c7b8b723-734e-4faf-afb7-80f146fc2ddd 2.png" alt="">
+                        <!-- <img src="/asset/c7b8b723-734e-4faf-afb7-80f146fc2ddd 2.png" alt=""> -->
                         <h2>09.30</h2>
                         <p>party</p>
                     </div>
                     <div class="img-item-2">
-                        <img src="/asset/w" alt="">
+                        <!-- <img src="/asset/w" alt=""> -->
                         <h2>09.45</h2>
                         <p>kuman</p>
                     </div>
                     <div class="img-item-2">
-                        <img src="" alt="">
+                        <!-- <img src="" alt=""> -->
                         <h2>10.00</h2>
                         <p>end</p>
                     </div>

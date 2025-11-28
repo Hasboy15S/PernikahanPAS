@@ -1,9 +1,11 @@
-<h2>Halo {{ $nama }},</h2>
+<p>Halo {{ $nama }},</p>
 
-<p>Berikut adalah QR Code undangan kamu. Simpan dan tunjukkan saat hadir.</p>
+<p>Berikut adalah QR Code undangan Anda:</p>
 
-<p><strong>Kode Undangan:</strong> {{ $code }}</p>
+<p style="text-align:center;">
+    <img src="{{ $cid }}" alt="QR Code" style="width:200px; height:auto;">
+</p>
 
-<img src="{{ $qrUrl }}" alt="QR Code" width="200">
+<p>Kode Undangan: <strong>{{ $code }}</strong></p>
 
-<p>Terima kasih!</p>
+<p>Silakan tunjukkan QR ini saat hadir di acara.</p>
