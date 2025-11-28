@@ -11,7 +11,8 @@ Route::get('/', function () {
     $produk = Produk::all();
     return view('index', compact('produk'));
 })->name('index');
-Route::get('/scan/{code}', [InvitationController::class, 'scan'])->name('scan.qr');
+Route::get('/scan', [InvitationController::class, 'scanner'])->name('scanner');
+Route::post('/scan', [InvitationController::class, 'scanCode'])->name('scanCode');
 Route::post('/invite-user', [InvitationController::class, 'storeFront'])->name('invite.front');
 Route::post('/api/scan', [InvitationController::class, 'scan'])->name('api.scan');
 Route::get('/qr/{id}', [InvitationController::class, 'qrImage'])->name('qr.image');

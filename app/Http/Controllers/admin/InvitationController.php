@@ -10,6 +10,9 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendInvitationQR;
+use Endroid\QrCode\Writer\PngWriter; // tambahkan di atas
+use Endroid\QrCode\Builder\Builder;
+
 
 
 class InvitationController extends Controller
@@ -83,7 +86,7 @@ class InvitationController extends Controller
             'nama' => $request->nama,
             'email' => $request->email,
             'jml_hadir' => $request->jml_hadir,
-            'messge' => $request->message,
+            'message' => $request->message,
             'code_qr' => $code,
             'status' => 'belum'
         ]);
@@ -107,15 +110,21 @@ public function storeFront(Request $request)
 
     $code = strtoupper(Str::random(8));
 
-$qrSvg = QrCode::format('svg')->size(300)->generate(url('/scan/' . $code));
-    $qrFileName = 'qr_' . $code . '.svg';
-    $qrPath = 'qr/' . $qrFileName;
-    Storage::disk('public')->put($qrPath, $qrSvg);
-    Mail::to($request->email)->send(new SendInvitationQR(
-        $request->nama,
-        $code,
-        asset('storage/' . $qrPath)
-    ));
+$qrFileName = 'qr_' . $code . '.png';
+$qrPath = 'qr/' . $qrFileName;
+
+QrCode::format('png')->size(300)->generate($code, storage_path('app/public/' . $qrPath));
+
+// Baca file PNG dan convert ke Base64
+$qrData = base64_encode(file_get_contents(storage_path('app/public/' . $qrPath)));
+$qrBase64 = 'data:image/png;base64,' . $qrData;
+
+// Kirim email dengan embed Base64
+Mail::to($request->email)->send(new SendInvitationQR(
+    $request->nama,
+    $code,
+    $qrBase64
+));
     Invitation::create([
         'nama' => $request->nama,
         'email' => $request->email,
@@ -133,42 +142,37 @@ $qrSvg = QrCode::format('svg')->size(300)->generate(url('/scan/' . $code));
             'qrCode' => $code
         ]);
 }
-public function scan($code)
+public function scanner()
 {
+    return view('admin.scanner.scanner'); // halaman scanner
+}
+
+public function scanCode(Request $request)
+{
+    $code = $request->input('code'); // dapat dari scanner JS
+
     $inv = Invitation::where('code_qr', $code)->first();
 
     if (!$inv) {
-        return view('invitation.scan_result', [
-            'title' => 'QR Tidak Valid',
-            'message' => 'Kode QR tidak ditemukan dalam sistem.'
-        ]);
+        return response()->json(['status' => 'error', 'message' => 'QR Tidak Valid']);
     }
 
-    // Jika sudah hadir
     if ($inv->status === 'hadir') {
-        return view('invitation.scan_result', [
-            'title' => 'Sudah Tercatat',
-            'message' => 'Anda sudah melakukan presensi sebelumnya.'
-        ]);
+        return response()->json(['status' => 'error', 'message' => 'Sudah tercatat']);
     }
 
-    // Update status menjadi hadir
-    $inv->update([
-        'status' => 'hadir'
-    ]);
+    $inv->update(['status' => 'hadir']);
 
-    return view('invitation.scan_result', [
-        'title' => 'Presensi Berhasil!',
-        'message' => 'Terima kasih, presensi Anda telah dicatat.'
-    ]);
+    return response()->json(['status' => 'success', 'message' => 'Presensi berhasil!']);
 }
+
 public function destroy($id)
 {
     $inv = Invitation::findOrFail($id);
 
     // hapus file qr jika ada
     if ($inv->code_qr) {
-        $file = 'qr/qr_' . $inv->code_qr . '.svg';
+        $file = 'qr/qr_' . $inv->code_qr . '.png';
         if (Storage::disk('public')->exists($file)) {
             Storage::disk('public')->delete($file);
         }
